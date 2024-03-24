@@ -1,0 +1,37 @@
+quarkus:
+  http:
+    port: 8082
+
+  datasource:
+    db-kind: postgresql
+    username: root
+    password: a5k4CooL
+    reactive:
+      url: vertx-reactive:postgresql://localhost:5432/postgres
+      max-size: 20
+
+  hibernate-orm:
+    database:
+      # none, create, drop-and-create, drop, update, validate.
+      generation: drop-and-create
+    log:
+      format-sql: false
+      sql: false
+    sql-load-script: import.sql
+
+  log:
+    category:
+      "org.jboss.resteasy.reactive.client.logging":
+        level: INFO
+
+mp:
+  openapi:
+    scan:
+      disable: true
+      extensions:
+        smallrye:
+          operationIdStrategy: PACKAGE_CLASS_METHOD
+
+  graphql:
+    showErrorMessage:
+      - control.exception.AlreadyExistingException
